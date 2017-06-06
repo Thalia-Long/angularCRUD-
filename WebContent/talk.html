@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!--
+Use angular filter to do: a empty text box and a table. when we put something in the text box,
+it will displays the corresponding row in the table..
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--Bootstrap Start-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <!--Bootstrap End-->
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+
+    </head>
+    
+    <!--<body ng-app="myApp">-->
+    <body ng-app="talkApp">
+    
+       <div ng-controller="talkController">
+           <div>
+               <a class="btn btn-default" href="#" role="button" ng-click="addBtn()">Add Talk</a>
+               <label>Search: <input ng-model="searchText"></label>
+           </div>
+           <table class="table table-bordered">
+                <tr>
+                    <th>id</th>
+                    <th>Name</th>
+                    <th>Speaker</th>
+                    <th>Venue</th>
+                    <th>Duration</th>
+                    <th>Action</th>
+                </tr>
+               <tr ng-show="showAddForm">
+                   <form name="form">
+                       <td><input type="text" ng-model="talk.id" class="form-control" placeholder="Id : (1, 2...)" required></td>
+                       <td><input type="text" ng-model="talk.name" class="form-control" placeholder="Victor" required></td>
+                       <td><input type="text" ng-model="talk.speaker" class="form-control" placeholder="Steve Jobs" required></td>
+                       <td><input type="text" ng-model="talk.venue" class="form-control" placeholder="MSG" required></td>
+                       <td><input type="text" ng-model="talk.duration" class="form-control" placeholder="Ex : 20" required></td>
+                       <td><div>
+                           <button type="submit" class="btn btn-success" ng-click="saveTalk(talk, form)">Save</button>
+                           <button type="button" class="btn btn-warning" ng-click="cancelAdd(form)">Cancel</button>
+                       </div></td>
+                   </form>
+               </tr>
+                <tr ng-repeat="t in listTalks | filter:searchText">
+                    <form>
+                        <td ng-hide="t.updateMode">{{t.id}}</td>
+                        <td ng-hide="!t.updateMode"><input type="text" ng-model="t.id" value="{{t.id}}" class="form-control" required></td>
+
+                        <td ng-hide="t.updateMode">{{t.name}}</td>
+                        <td ng-hide="!t.updateMode"><input type="text" ng-model="t.name" value="{{t.name}}" class="form-control" required></td>
+
+                        <td ng-hide="t.updateMode">{{t.speaker}}</td>
+                        <td ng-hide="!t.updateMode"><input type="text" ng-model="t.speaker" value="{{t.speaker}}" class="form-control" required></td>
+
+                        <td ng-hide="t.updateMode">{{t.venue}}</td>
+                        <td ng-hide="!t.updateMode"><input type="text" ng-model="t.venue" value="{{t.venue}}" class="form-control" required></td>
+
+                        <td ng-hide="t.updateMode">{{t.duration}}</td>
+                        <td ng-hide="!t.updateMode"><input type="text" ng-model="t.duration" value="{{t.duration}}" class="form-control" required></td>
+
+                        <td ng-hide="t.updateMode">
+                            <button ng-hide="t.deleteBtnHide" type="button" class="btn btn-warning" ng-click="deleteTalk($index)">Delete</button>
+                            <button ng-hide="t.deleteBtnHide" type="button" class="btn btn-info" ng-click="editTalk($index)">Edit</button>
+                            <div ng-hide="!t.deleteBtnHide" >
+                                <button type="button" class="btn btn-danger" ng-click="confirmDelete($index)">Yes</button>
+                                <button type="button" class="btn btn-default" ng-click="cancelDelete($index)">No</button>
+                            </div>
+                        </td>
+                        <td ng-hide="!t.updateMode">
+                            <div>
+                                <button type="button" class="btn btn-danger" ng-click="confirmEdit(t)">Save</button>
+                                <button type="button" class="btn btn-default" ng-click="cancelEdit($index)">Cancel</button>
+                            </div>
+                        </td>
+                    </form>
+                </tr>
+               <tr>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td><b>Total</b></td>
+                   <td>{{total}}</td>
+                   <td></td>
+               </tr>
+            </table>
+            
+        </div>
+
+       <script src="App/angular/talk/talk.module.js"></script>
+       <script src="App/angular/talk/talk.controller.js"></script>
+    </body>
+
+    
+</html>

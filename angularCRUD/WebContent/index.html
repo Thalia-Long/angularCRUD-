@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--
+Single page applcation using ngRoute (has some restrictions) , ui-route. 
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Import the anguar js framework, and the js classes -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+        <script type="https"></script>
+        <script src="App/app1.js"></script>
+        <script src ="App/talk.js"></script>
+         <script src ="App/service.js"></script>
+    </head>
+    
+    <body ng-app="myApp">
+        <div>
+            {{2+4}}
+            {{msg}}
+            {{talks}}
+            
+        </div>
+        
+        <div>
+            <input type="text" ng-model="text"/> <br/><br/>
+            You entered: {{text}}
+        </div>
+        
+        <div ng-init="Employee=[{id:1, Name:'Tom'},
+                                {id:2, Name:'John'},
+                                {id:3, Name:'Chris'}]">            
+        </div>
+        
+        <h2>This is using ng-init</h2>
+        <table>
+            <tr>
+                <th>id</th>
+                <th>Name</th>
+            </tr>
+            <tr ng-repeat="e in Employee">
+                <td>{{e.id}}</td>
+                <td>{{e.Name}}</td>
+            </tr>
+        </table>        
+        
+        <h2>This is using ng-controller</h2>
+        <table>
+            <tr>
+                <th><input type="text" ng-model = "id"/></th>
+                <th>Name</th>
+            </tr>
+            <tr ng-repeat="e in Emp">
+                <td>{{e.id}}</td>
+                <td>{{e.Name}}</td>
+            </tr>
+            <tr>
+            
+            
+            </tr>
+            
+        </table>
+        
+        <br/>
+        <button ng-click="Show()">Click Me</button>
+        
+		
+		<!--<script type="https"></script>-->
+        <script src="App/app1.js"></script>
+        <script src ="App/talk.js"></script>
+         <script src ="App/service.js"></script>
+    </body>
+</html>
